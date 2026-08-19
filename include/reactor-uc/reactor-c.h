@@ -18,6 +18,19 @@
 
 #define lf_request_stop() env->request_shutdown(env, MSEC(0))
 
+#define lf_print_error(...)                                                                                            \
+  do {                                                                                                                 \
+    printf("ERROR: ");                                                                                                 \
+    printf(__VA_ARGS__);                                                                                               \
+    printf("\n");                                                                                                     \
+  } while (0)
+
+#define lf_schedule_copy(action, offset, val, n)                                                                       \
+  do {                                                                                                                 \
+    Action* __a = (Action*)(action);                                                                                   \
+    __a->schedule(__a, (offset), (const void*)(val));                                                                  \
+  } while (0)
+
 #define lf_schedule_token(action, offset, val)                                                                         \
   do {                                                                                                                 \
     __typeof__(val) __val = (val);                                                                                     \
