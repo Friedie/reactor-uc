@@ -460,7 +460,8 @@ class UcConnectionGenerator(
     // drawn.
 
     return if (conn.channels.all {
-      it.src.bankIdx == it.dest.portIdx && it.src.portIdx == it.dest.bankIdx
+      it.src.varRef.container != null && it.dest.varRef.container != null &&
+          it.src.bankIdx == it.dest.portIdx && it.src.portIdx == it.dest.bankIdx
     } && conn.channels.size >= 4) {
       // here we need to calculate the maximum bank and port index, which will
       // become the bounds of the two for-loops.
